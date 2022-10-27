@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+    <title>Users Management System</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <h1>List Users</h1>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <a th:href="@{/users/new}" class="btn btn-primary">ADD USER</a>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>SURNAME</th>
+      <th>AGE</th>
+      <th>ACTIONS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${table}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.surname}"></td>
+      <td th:text="${user.age}"></td>
+      <td>
+        <a th:href="@{/users/edit/{id}(id=${user.id})}"
+        class="btn btn-primary">UPDATE</a>
+        <a th:href="@{/users/{id}(id=${user.id})}"
+           class="btn btn-danger">DELETE</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="row">
+  <div class="col-lg-3">
+    <a th:href="@{/}" class="btn btn-primary">START PAGE</a>
+  </div>
+</div>
+</body>
+</html>
