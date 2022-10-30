@@ -17,9 +17,11 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<User> listUsers() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<User> users = entityManager.createQuery(
-                "SELECT user FROM User user WHERE user.age > -1 ORDER BY user.id")
-                .getResultList();
+        TypedQuery<User> query = entityManager.createQuery(
+                "SELECT user FROM User AS user WHERE user.age > :count ORDER BY user.id", User.class
+                );
+        query.setParameter("count", -1);
+        List<User> users = query.getResultList();
         entityManager.close();
         return users;
     }
